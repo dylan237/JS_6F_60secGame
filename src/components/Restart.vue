@@ -16,9 +16,6 @@ export default {
   name: 'restart',
   props: {},
   methods: {
-    tagHandler(key) {
-      this.$emit('tagHandler', key);
-    }
   }
 }
 </script>
@@ -31,14 +28,12 @@ export default {
         color: #fff;
         border: 4px solid #fff;
         font-size: 30px;
-        font-weight: bold;
         padding: 5px 20px;
         text-align: center;
         margin-bottom: 25px;
       }
       .scoreTitle {
         font-size: 56px;
-        font-weight: bold;
         text-align: center;
         margin-bottom: 30px;
         >span {
@@ -48,7 +43,6 @@ export default {
       .score {
         font-size: 112px;
         text-align: center;
-        font-weight: bold;
       }
     }
     .buttonWrapper {
@@ -58,9 +52,13 @@ export default {
         width: 350px;
         font-size: 36px;
         color: $primary-color;
-        font-weight: bold;
         background-color: #000;
         margin-bottom: 15px;
+        transition: all .3s ease-in-out; 
+        &:hover {
+          color: #000;
+          background-color: #fff;
+        }
       }
     }
   }

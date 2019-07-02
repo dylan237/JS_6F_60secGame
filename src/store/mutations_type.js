@@ -1,1 +1,2 @@
-export const SETDATEPICKERDATE = 'SETDATEPICKERDATE';
+export const actCountdown = 'actCountdown';
+export const resetCountdown = 'resetCountdown';

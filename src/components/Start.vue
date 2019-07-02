@@ -20,9 +20,6 @@ export default {
   name: 'start',
   props: {},
   methods: {
-    tagHandler(key) {
-      this.$emit('tagHandler', key);
-    }
   }
 }
 </script>
@@ -37,12 +34,10 @@ export default {
         font-size: 240px;
         text-shadow: 12px 1px 0px #000;
         color: #fff;
-        font-weight: bold;
         margin-right: 35px;
       }
       &__titleB {
         font-size: 96px;
-        font-weight: bold;
         color: #000; 
         sup {
           font-size: 44px;
@@ -50,6 +45,7 @@ export default {
           border-bottom: 10px double #fff;
           vertical-align: super;
           margin-left: 15px;
+          white-space: nowrap;
         }
       }
     }
@@ -60,9 +56,13 @@ export default {
         width: 350px;
         font-size: 36px;
         color: $primary-color;
-        font-weight: bold;
         background-color: #000;
         margin-bottom: 15px;
+        transition: all .3s ease-in-out; 
+        &:hover {
+          color: #000;
+          background-color: #fff;
+        }
       }
       .description {
         font-style: italic;

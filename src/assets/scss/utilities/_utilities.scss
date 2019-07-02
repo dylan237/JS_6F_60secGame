@@ -2,14 +2,31 @@
     opacity: .5;
     pointer-events: none;
 }
+.text-red {
+    color: #ff3c3c !important;
+    animation: bounce2 .5s linear infinite alternate;
+}
+.removeAnimation {
+    transition: opacity 1.5s ease-out;
+    animation: unset;
+    opacity: 0;
+}
 .bounce {
     animation: bounce .8s linear infinite alternate;
 }
 @keyframes bounce {
-0% {
-    transform: scale(1);
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
 }
-100% {
-    transform: scale(1.2);
-}
+@keyframes bounce2 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
 }

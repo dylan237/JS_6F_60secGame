@@ -8,7 +8,9 @@
           <div class="b">001</div>
         </div>
       </div>
-      <div class="top__time">00 : 59</div>
+      <div class="top__time"
+      :class="{'text-red':storeCountdown <= 10,'removeAnimation':storeCountdown == 0 }"
+      >{{countdownFormate}}</div>
     </div>
 
     <div class="bottom">
@@ -29,8 +31,16 @@ export default {
   name: 'primary',
   props: {},
   methods: {
-    tagHandler(key) {
-      this.$emit('tagHandler', key);
+  },
+  computed: {
+    countdownFormate() {
+      if (this.storeCountDown == 60) {
+        return '01 : 00';
+      } else if(this.storeCountdown < 10) {
+        return `00 : 0${this.storeCountdown}`;
+      } else {
+        return `00 : ${this.storeCountdown}`;
+      }
     }
   }
 }
@@ -46,7 +56,6 @@ export default {
         color: #fff;
         border: 4px solid #fff;
         font-size: 30px;
-        font-weight: bold;
         padding: 5px 20px;
       }
       .score {
@@ -57,13 +66,11 @@ export default {
           background-color: #fff;
           color: $primary-color;
           font-size: 30px;
-          font-weight: bold;
           padding: 5px 10px;
           display: inline-block;
         }
         .b {
           font-size: 35px;
-          font-weight: bold;
           color: #000;
           display: inline-block;
         }
@@ -73,7 +80,6 @@ export default {
       font-size: 96px;
       color: #fff;
       font-style: italic;
-      font-weight: bold;
     }
   }
   .bottom {
@@ -81,7 +87,6 @@ export default {
     &__formula {
       font-size: 112px;
       color: #000;
-      font-weight: bold;
       display: inline-block;
       > span {
         color: #fff;
@@ -98,7 +103,7 @@ export default {
         height: 100%;
         width: 100%;
         font-size: 112px;
-        font-weight: bold;
+
       }
       &:before {
         content: 'press enter to answer';
@@ -115,4 +120,5 @@ export default {
       }
     }
   }
+
 </style>
