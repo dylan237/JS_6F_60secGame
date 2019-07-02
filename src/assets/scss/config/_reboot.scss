@@ -1,15 +1,15 @@
 html {
     box-sizing: border-box;
-    transition: 0.5s all;
+    // transition: 0.5s all;
     -ms-overflow-style: scrollbar;
     color: $text-color-deep;
-    text-size-adjust: 100%;
+    // text-size-adjust: 100%;
 }
 body {
     background-color: $bg-color;
 }
 * {
-    touch-action: pan-y;
+    // touch-action: pan-y;
 }
 *,
 *::before,

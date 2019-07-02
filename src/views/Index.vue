@@ -1,23 +1,23 @@
 <template>
-<div>
-  <button @click="currentTag('Restart')">Click!</button>
-  
-  <transition name="fade">
-    <div :is="tagName"></div>
-  </transition>
-</div>
+  <!-- <button @click="currentTag('Restart')">Click!</button> -->
+  <div class="wrapper">
+    <transition name="fade" @enter="enter($event)" @leave="leave($event)">
+      <div :is="tagName" @tagHandler="currentTag"></div>
+    </transition>
+  </div>
 </template>
 
 <script>
 import Start from '@/components/Start.vue'
-import Main from '@/components/Main.vue'
+import Primary from '@/components/Primary.vue'
 import Restart from '@/components/Restart.vue'
+import { setTimeout } from 'timers';
 
 export default {
   name: 'index',
   components: {
     Start,
-    Main,
+    Primary,
     Restart
   },
   data() {
@@ -28,6 +28,16 @@ export default {
   methods: {
     currentTag(tag) {
       this.tagName = tag;
+    },
+    enter(e) {
+      console.log('enter')
+      e.style.width = 0;
+      setTimeout(() => {
+        e.style.width = 'auto';
+      }, 500);
+    },
+    leave(e) {
+      console.log('leave')
     }
   },
   created() {
@@ -48,12 +58,20 @@ export default {
 </script>
 
 <style lang="scss">
+  .wrapper {
+    margin: 0 auto;
+    width: 70%;
+    min-width: 320px;
+    max-width: 1280px;
+    height: 100vh;
+    @include flex(center, center);
+  }
   .fade-leave-active {
-    transition: opacity .6s;
+    transition: opacity .5s ease-out;
   }
   .fade-enter-active {
-    transition: opacity .6s;
-    transition-delay: .6s;
+    transition: opacity .5s ease-in;
+    transition-delay: .5s;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
