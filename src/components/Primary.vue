@@ -5,7 +5,7 @@
         <div class="mainTitle">60 SECONDS CHALLENGE</div>
         <div class="score">
           <div class="a">SCORE</div>
-          <div class="b">001</div>
+          <div class="b">{{storeScore | scoreFormate}}</div>
         </div>
       </div>
       <div class="top__time"
@@ -15,12 +15,10 @@
 
     <div class="bottom">
       <div class="bottom__formula">
-        11 <span>×</span> 12 <span>=</span>
+        {{numA}} <span>{{ operator | operatorChange }}</span> {{numB}} <span>=</span>
       </div>
-      <!-- <input type="text" class="bottom__result"> -->
       <div class="bottom__result">
-        <!-- <span> 132</span> -->
-        <input type="text" @keydown.enter="tagHandler('Restart')">
+        <input type="text" @keydown.enter="compareAnswer" v-model="playerAnswer">
       </div>
     </div>
   </div>
@@ -30,7 +28,62 @@
 export default {
   name: 'primary',
   props: {},
+  data() {
+    return {
+      numA: '',         // 算式中的第一個數字
+      numB: '',         // 算式中的第二個數字
+      operator: '',     // 運算符號
+      answer: '',       // 隨機題目的答案
+      playerAnswer: '', // 玩家輸入的答案
+      addScore: 1,      // 60-20秒對一題加一分，20秒內加五分
+    }
+  },
   methods: {
+    // 產生題目
+    createFormula() {
+      const operators = ['+', '-', '*', '/'];
+      this.operator = operators[this.getRandomNum(0, 3)];
+      let min = '';
+      let max = '';
+
+      if (this.storeCountdown > 40) {
+        min = 1;
+        max = 9;
+        this.addScore = 1;
+      } else if (this.storeCountdown <= 40 && this.storeCountdown > 20) {
+        min = 10;
+        max = 99;
+        this.addScore = 1;
+      } else if(this.storeCountdown <= 20){
+        min = 100;
+        max = 999;
+        this.addScore = 5;
+      }
+      this.numA = this.getRandomNum(min, max);
+      this.numB = this.getRandomNum(min, max);
+      this.answer = eval(this.numA + this.operator + this.numB);
+    },
+    // 對答案
+    compareAnswer() {
+      
+      if (this.playerAnswer == this.answer) {
+        this.$store.dispatch("mutateScore", this.addScore);
+        console.log('O');
+      } else if(this.playerAnswer != this.answer){
+        this.$store.dispatch("mutateScore", -1);
+        console.log('X');
+      } 
+
+      this.playerAnswer = '';
+      this.createFormula();
+    },
+    // 產生指定區間亂數
+    getRandomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  },
+  mounted() {
+    this.createFormula();
   },
   computed: {
     countdownFormate() {
@@ -42,6 +95,21 @@ export default {
         return `00 : ${this.storeCountdown}`;
       }
     }
+  },
+  filters: {
+    operatorChange(val) {
+      switch(val) {
+        case '*':
+          return '×';
+          break;
+        case '/':
+          return '÷';
+          break;
+        default:
+          return val;
+          break
+      }
+    },
   }
 }
 </script>
@@ -83,16 +151,19 @@ export default {
     }
   }
   .bottom {
-    @include flex(center, center);
+    @include flex(space-between, center);
     &__formula {
+      flex: 1 0;
       font-size: 112px;
       color: #000;
-      display: inline-block;
+      display: inline-flex;
+      justify-content: space-between;
       > span {
         color: #fff;
       }
     }
     &__result {
+      flex: 0 0 300px;
       max-width: 300px;
       position: relative;
       margin-left: 50px;
@@ -103,6 +174,7 @@ export default {
         height: 100%;
         width: 100%;
         font-size: 112px;
+        font-weight: bold;
 
       }
       &:before {

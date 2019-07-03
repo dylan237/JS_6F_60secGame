@@ -25,6 +25,7 @@ export default {
     };
   },
   methods: {
+    // 切換頁邏輯
     currentTag(tag) {
       if (tag == "Primary") {
         const countInterval = setInterval(() => {
@@ -37,10 +38,12 @@ export default {
           console.log(this.storeCountdown);
         }, 1000);
       } else if (tag == "Start") {
-        this.$store.dispatch("resetCountdown", 12);
+        this.$store.dispatch("resetCountdown", 60);
+        this.$store.dispatch("scoreToZero");
       }
       this.tagName = tag;
     },
+    // Vue transition 生命週期
     enter(e) {
       console.log("enter");
       e.style.width = 0;
@@ -51,17 +54,6 @@ export default {
     leave(e) {
       console.log("leave");
     }
-  },
-  created() {
-    console.log(process.env.VUE_APP_DEMO);
-  },
-  computed: {
-    getVuexData() {
-      return this.$store.getters.GETDATE;
-    },
-    getVuexStaticTime() {
-      return this.$store.getters.GETORIGINDATA;
-    },
   }
 };
 </script>

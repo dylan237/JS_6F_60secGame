@@ -3,7 +3,7 @@
     <div class="title">
       <div class="mainTitle">60 SECONDS CHALLENGE</div>
       <div class="scoreTitle"><span>—</span> YOUR FINAL SCORE <span>—</span></div>
-      <div class="score">74</div>
+      <div class="score">{{storeScore | scoreFormate}}</div>
     </div>
     <div class="buttonWrapper">
       <div class="againBtn p-btn" @click="tagHandler('Start')">TRY AGAIN!</div>
@@ -16,6 +16,20 @@ export default {
   name: 'restart',
   props: {},
   methods: {
+  },
+  data() {
+    return {
+    }
+  },
+  created() {
+    // this.$bus.$on('getName', res => {
+    //   console.log(res)
+    //   this.hahaha = res;
+    //   alert(res)
+    // })
+  },
+  beforeDestroy() {
+    // this.$bus.$off('getName')
   }
 }
 </script>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueLodash from 'vue-lodash';
 import mixins from '@/mixins/utilities.js';
+import '@/bus.js';
 
 const options = { name: 'lodash' };
 Vue.config.productionTip = false

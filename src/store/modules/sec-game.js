@@ -1,9 +1,8 @@
 import * as types from '../mutations_type.js'
 
 const state = {
-  // datePickerStartTime: '',
-  // datePickerEndTime: ''
-  countdown: 12,
+  countdown: 60, // 倒數秒數
+  score: 0,      // 總分
 }
 
 const mutations = {
@@ -13,37 +12,39 @@ const mutations = {
   [types.resetCountdown](state, payload) {
     state.countdown = payload;
   },
+  [types.mutateScore](state, payload) {
+    let newNum = parseFloat(payload);
+    console.log(newNum);
+    state.score = state.score + newNum >= 0 ? state.score + newNum : 0;
+  },
+  [types.scoreToZero](state, payload) {
+    state.score = 0;
+  },
+  
 }
 
-// usage - this.$store.dispatch('SETDATEPICKERDATE', { starttime:'', endtime:''})
 const actions = {
   actCountdown(context, payload) {
     context.commit('actCountdown', payload)
   },
   resetCountdown(context, payload) {
     context.commit('resetCountdown', payload)
+  },
+  mutateScore(context, payload) {
+    context.commit('mutateScore', payload)
+  },
+  scoreToZero(context, payload) {
+    context.commit('scoreToZero', payload)
   }
 }
 
-// usage - this.$store.getters.GETDATE
 const getters = {
   countdown(state) {
     return state.countdown;
+  },
+  score(state) {
+    return state.score;
   }
-  // GETDATE(state) {
-  //   let obj = {
-  //     starttime: new Date(state.datePickerStartTime).toLocaleDateString(),
-  //     endtime: new Date(state.datePickerEndTime).toLocaleDateString()
-  //   }
-  //   return obj
-  // },
-  // GETORIGINDATA(state) {
-  //   let obj = {
-  //     starttime: state.datePickerStartTime,
-  //     endtime: state.datePickerEndTime,
-  //   }
-  //   return obj
-  // }
 }
 
 export default {

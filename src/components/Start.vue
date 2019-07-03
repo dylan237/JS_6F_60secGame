@@ -19,8 +19,11 @@
 export default {
   name: 'start',
   props: {},
-  methods: {
-  }
+  data() {
+    return {}
+  },
+  methods: {},
+  created() {}
 }
 </script>
 
