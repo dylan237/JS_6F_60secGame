@@ -1,29 +1,22 @@
-# vue project
+## JS地下城練習 - 6F 60秒算數遊戲
 
-## Project setup
-```
-npm install
-```
+[DEMO](https://dylan237.github.io/JS_6F_60secGame/#/)  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 使用技術
+- HTML
+- SCSS
+- Vue
+- Vue CLI3
+- Vuex
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## BOSS弱點
 
-### Run your tests
-```
-npm run test
-```
+1.【特定技術】遊戲規則  
+a.0~20 秒為 1位數計算 (5-3)，21~40 秒為 2 位數計算 (30*19)，41~60 秒為 3 位數計算 (332+312)，加減乘除規則請用隨機產生，不可寫死題目，60 秒內可無限次數答題。  
+b.0~40 秒答對加一分，41~60 秒答對加五分，答錯扣一分，最多僅能扣到零分  
 
-### Lints and fixes files
-```
-npm run lint
-```
+2.【特定技術】不可設計跳轉頁面，都得在同一頁內部切換頁面完成。
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## 資源下載
+1. [UI線上設計稿](https://xd.adobe.com/spec/778c6e57-07eb-4499-69da-779013227c65-01bd/)
