@@ -5,7 +5,9 @@
         <div class="mainTitle">60 SECONDS CHALLENGE</div>
         <div class="score">
           <div class="a">SCORE</div>
-          <div class="b">{{storeScore | scoreFormate}}</div>
+          <div class="b">{{storeScore | scoreFormate}}</div> 
+          <!-- <span class="addScore plus">{{addScore}}</span>
+          <span class="addScore minus">-1</span> -->
         </div>
       </div>
       <div class="top__time"
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   name: 'primary',
   props: {},
@@ -35,7 +38,7 @@ export default {
       operator: '',     // 運算符號
       answer: '',       // 隨機題目的答案
       playerAnswer: '', // 玩家輸入的答案
-      addScore: 1,      // 60-20秒對一題加一分，20秒內加五分
+      addScore: '+1',      // 60-20秒對一題加一分，20秒內加五分
     }
   },
   methods: {
@@ -49,15 +52,15 @@ export default {
       if (this.storeCountdown > 40) {
         min = 1;
         max = 9;
-        this.addScore = 1;
+        this.addScore = '+1';
       } else if (this.storeCountdown <= 40 && this.storeCountdown > 20) {
         min = 10;
         max = 99;
-        this.addScore = 1;
+        this.addScore = '+1';
       } else if(this.storeCountdown <= 20){
         min = 100;
         max = 999;
-        this.addScore = 5;
+        this.addScore = '+5';
       }
       this.numA = this.getRandomNum(min, max);
       this.numB = this.getRandomNum(min, max);
@@ -65,17 +68,30 @@ export default {
     },
     // 對答案
     compareAnswer() {
-      
       if (this.playerAnswer == this.answer) {
-        this.$store.dispatch("mutateScore", this.addScore);
+        this.addOrMinusAnimation(this.addScore, true)
+        this.$store.dispatch("mutateScore", parseFloat(this.addScore));
         console.log('O');
       } else if(this.playerAnswer != this.answer){
+        this.addOrMinusAnimation('-1', false)
         this.$store.dispatch("mutateScore", -1);
         console.log('X');
       } 
 
       this.playerAnswer = '';
       this.createFormula();
+    },
+    // 加減分動畫
+    addOrMinusAnimation(score, boo) {
+      const parentDom = document.querySelector('.score');
+      const dom = document.createElement('span');
+      dom.classList.add('addScore');
+      dom.innerText = score;
+      boo ? dom.classList.add('plus') : dom.classList.add('minus') 
+      parentDom.appendChild(dom);
+      setTimeout(() => {
+        dom.remove();
+      }, 1000)
     },
     // 產生指定區間亂數
     getRandomNum(min, max) {
@@ -117,7 +133,7 @@ export default {
 <style scoped lang="scss">
   .top {
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     &__title {
       margin-right: 100px;
       .mainTitle {
@@ -129,6 +145,7 @@ export default {
       .score {
         display: flex;
         align-items: center;
+        position: relative;
         .a {
           margin-right: 10px;
           background-color: #fff;

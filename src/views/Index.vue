@@ -35,7 +35,6 @@ export default {
             return;
           }
           this.$store.dispatch("actCountdown");
-          console.log(this.storeCountdown);
         }, 1000);
       } else if (tag == "Start") {
         this.$store.dispatch("resetCountdown", 60);

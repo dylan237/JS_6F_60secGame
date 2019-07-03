@@ -11,6 +11,33 @@
     animation: unset;
     opacity: 0;
 }
+// 加減分動畫
+.addScore {
+    margin-left: 15px;
+    font-size: 50px;
+    animation: score 1s ease-out;
+    position: absolute;
+    left: 50%;
+    // right: 0;
+    text-shadow: 2px 2px 0 #000;
+}
+.plus {
+    color: rgb(0, 180, 0);   
+}
+.minus {
+    color: #ff3c3c;
+} 
+@keyframes score {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-25px);
+        opacity: .3;
+    }
+}
+// 文字彈跳動畫
 .bounce {
     animation: bounce .8s linear infinite alternate;
 }
