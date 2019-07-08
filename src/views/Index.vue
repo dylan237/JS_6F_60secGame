@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <transition name="fade" @enter="enter($event)" @leave="leave($event)">
+    <transition name="fade" @enter="enter($event)" @leave="leave($event)" mode="out-in"> <!--mode="out-in" 避免兩元素同時出現導致跑版-->
       <div :is="tagName" @tagHandler="currentTag"></div>
     </transition>
   </div>
@@ -44,11 +44,11 @@ export default {
     },
     // Vue transition 生命週期
     enter(e) {
-      console.log("enter");
-      e.style.width = 0;
-      setTimeout(() => {
-        e.style.width = "auto";
-      }, 500);
+      // console.log("enter");
+      // e.style.width = 0;
+      // setTimeout(() => {
+      //   e.style.width = "auto";
+      // }, 500);
     },
     leave(e) {
       console.log("leave");

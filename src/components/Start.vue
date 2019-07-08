@@ -20,10 +20,14 @@ export default {
   name: 'start',
   props: {},
   data() {
-    return {}
+    return {
+    }
   },
   methods: {},
-  created() {}
+  created() {
+  },
+  mounted() {
+  }
 }
 </script>
 

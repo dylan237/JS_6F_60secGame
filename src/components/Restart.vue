@@ -20,16 +20,6 @@ export default {
   data() {
     return {
     }
-  },
-  created() {
-    // this.$bus.$on('getName', res => {
-    //   console.log(res)
-    //   this.hahaha = res;
-    //   alert(res)
-    // })
-  },
-  beforeDestroy() {
-    // this.$bus.$off('getName')
   }
 }
 </script>

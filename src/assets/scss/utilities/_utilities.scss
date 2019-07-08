@@ -32,9 +32,12 @@
         transform: translateY(0);
         opacity: 1;
     }
+    50% {
+        opacity: 0.6;
+    }
     100% {
         transform: translateY(-25px);
-        opacity: .3;
+        opacity: 0;
     }
 }
 // 文字彈跳動畫
